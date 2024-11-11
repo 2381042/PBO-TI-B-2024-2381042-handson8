@@ -1,20 +1,23 @@
 package views;
 
-import java.util.Scanner;
 import entities.TodoList;
+import java.util.Scanner;
 import services.TodoListService;
 
-public class TodoListTerminalViewImpl implements TodoListView{
-    private final TodoListService todoListService;
-    public Scanner scanner = new Scanner (System.in);
+import static repository.TodoListRepositoryImpl.todos;
+import static repository.TodoListRepositoryImpl.todos;
 
-    public TodoListTerminalViewImpl(TodoListService todoListService) {
+public class TodoListTerminalViewImpl implements TodoListView{
+    private  final TodoListService todoListService;
+    public Scanner scanner = new Scanner(System.in);
+
+
+    public TodoListTerminalViewImpl(final TodoListService todoListService){
         this.todoListService = todoListService;
     }
 
     public void showTodoList() {
         System.out.println("TODO LIST");
-        TodoList[] todos = todoListService.getTodoList();
         for (var i = 0; i < todos.length; i++) {
             var todo = todos[i];
             if (todo != null) {
@@ -23,13 +26,13 @@ public class TodoListTerminalViewImpl implements TodoListView{
         }
     }
 
-    public  String input(String info) {
-        System.out.println(info + " : ");
+    public String input(String info) {
+        System.out.print(info + " : ");
         var data = scanner.nextLine();
         return data;
     }
 
-    public  void showMainMenu() {
+    public void showMainMenu() {
         // infinite loop so the program will always run
         boolean isRunning = true;
         while (isRunning) {
@@ -61,7 +64,7 @@ public class TodoListTerminalViewImpl implements TodoListView{
         }
     }
 
-    public  void showMenuRemoveTodoList() {
+    public void showMenuRemoveTodoList() {
         System.out.println("MENGHAPUS TODO LIST");
         var number = input("Nomor yang dihapus (x jika batal)");
         if (number.equals("x")) {
@@ -74,7 +77,7 @@ public class TodoListTerminalViewImpl implements TodoListView{
         }
     }
 
-    public  void showMenuAddTodoList() {
+    public void showMenuAddTodoList() {
         System.out.println("MENAMBAH TODO LIST");
         var todo = input("Todo (x jika batal)");
         if (todo.equals("x")) {
@@ -84,7 +87,7 @@ public class TodoListTerminalViewImpl implements TodoListView{
         }
     }
 
-    public  void showMenuEditTodoList() {
+    public void showMenuEditTodoList() {
         System.out.println("MENGEDIT TODO LIST");
         String selectedTodo = input("Masukkan nomor todo (x jika batal)");
         if (selectedTodo.equals("x")) {
@@ -103,9 +106,9 @@ public class TodoListTerminalViewImpl implements TodoListView{
     }
 
 
+
     @Override
     public void run() {
-        showMainMenu();
 
     }
 }
